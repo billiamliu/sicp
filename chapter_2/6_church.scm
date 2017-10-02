@@ -7,14 +7,14 @@
 
 (define inc (lambda (x) (+ x 1)))
 
-(define add (lambda (m n)
-              (lambda (f) (lambda (x) ((m f) ((n f) x))))))
+(define (add m n)
+  (lambda (f) (lambda (x) ((m f) ((n f) x)))))
 
-(define mul (lambda (m n)
-              (lambda (f) (lambda (x) ((m (n f)) x)))))
+(define (mul m n)
+  (lambda (f) (lambda (x) ((m (n f)) x))))
 
-(define pow (lambda (m n)
-              (lambda (f) (lambda (x) (((n m) f) x)))))
+(define (pow m n)
+  (lambda (f) (lambda (x) (((n m) f) x))))
 
 ((one inc) 0) ; => 1
 (((add one two) inc) 0) ; => 3
