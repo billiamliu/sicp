@@ -27,7 +27,7 @@
     (cond ((= i 1) #t)
       (else (cond ((= (remainder m i) 0) #f)
               (else (is-not-divisible-by-smaller (- i 1) m))))))
-  (is-not-divisible-by-smaller (- n 1) n))
+  (is-not-divisible-by-smaller (floor (sqrt n)) n))
 
 (define (prime-sum? pair)
   (prime? (+ (car pair) (cadr pair))))
