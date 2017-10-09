@@ -6,6 +6,7 @@
 (load "metacircular/boolean.scm")
 (load "metacircular/conditional.scm")
 (load "metacircular/definition.scm")
+(load "metacircular/environment.scm")
 (load "metacircular/eval.scm")
 (load "metacircular/lambda.scm")
 (load "metacircular/let.scm")
