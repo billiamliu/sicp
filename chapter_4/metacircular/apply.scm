@@ -12,3 +12,14 @@
         (else
           (error "Unknown procedure type -- APPLY" proc))))
 
+(define (make-procedure params body env)
+  (list 'procedure params body env))
+
+(define (compound-procedure? proc)
+  (tagged-list? proc 'procedure))
+
+(define (procedure-parameters proc) (cadr proc))
+
+(define (procedure-body proc) (caddr proc))
+
+(define (procedure-environment proc) (cadddr p))

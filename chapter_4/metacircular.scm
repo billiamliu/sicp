@@ -3,6 +3,7 @@
 (load "metacircular/apply.scm")
 (load "metacircular/assignment.scm")
 (load "metacircular/begin.scm")
+(load "metacircular/boolean.scm")
 (load "metacircular/conditional.scm")
 (load "metacircular/definition.scm")
 (load "metacircular/eval.scm")

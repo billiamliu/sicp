@@ -1,5 +1,7 @@
 (define (cond? exp) (tagged-list? exp 'cond))
 (define (if? exp) (tagged-list? exp 'if))
+(define (cond-extended? clause)
+  (eq? (cadr clause) '=>))
 
 (define (eval-if exp env)
   (if (true? (eval (if-predicate exp) env))
@@ -37,3 +39,8 @@
         (make-if (cond-predicate first)
                  (sequence->exp (cond-actions first))
                  (expand-clauses rest))))))
+
+(define (cond-actions clause)
+  (if (cond-extended? clause)
+    (list (caddr clause) (car clause))
+    (cdr clause)))
