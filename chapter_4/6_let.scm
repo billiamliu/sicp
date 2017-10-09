@@ -10,10 +10,15 @@
   ((lambda (x y) (newline) (display x) (newline) (display y))
    (+ 1 1) (+ 3 3)))
 
-;; (let (<assignments>) <body>)
-(define (let->lambda exp)
-  (let ((parameters (map car (cadr exp)))
-        (body (caddr exp)))
-    ((lambda (parameters) body) (map cadr (cadr exp)))))
+;;
+
+(define (make-lambda params body)
+  (cons 'lambda (cons params body)))
+
+;; (let ((x (+ 1 1)) (y (+ 3 3))) (display (+ x y)))
+(define (let->lambda exp) 
+   (cons (make-lambda (map car (cadr exp)) (cddr exp)) 
+         (map cadr (cadr exp)))) 
 
 (let->lambda '(let ((x (+ 1 1)) (y (+ 3 3))) (display (+ x y))))
+;; ((lambda (x y) (display (+ x y))) (+ 1 1) (+ 3 3))
