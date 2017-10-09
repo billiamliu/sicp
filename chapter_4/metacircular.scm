@@ -13,7 +13,7 @@
                          env))
         ((begin? exp)
          (eval-sequence (begin-actions exp) env))
-        ((cond? exp) (eval (cond-> if exp) env))
+        ((cond? exp) (eval (cond->if exp) env))
         ((application? exp)
          (apply (eval (operator exp) env)
                 (list-of-values (operands exp) env)))
@@ -35,7 +35,7 @@
 ;; components
 
 ;; returns the list of operand values of an expression
-(define (list-of-values exps env) ;; example (<operator>add <operand>addend <operand>augend)
+(define (list-of-values exps env) ;; example (<operand>addend <operand>augend)
   (if (no-operands? exps)
     '()
     (cons (eval (first-operand exps) env) ;; eval (and apply) to extract the value of the first operand
@@ -150,7 +150,7 @@
 (define (first-operand ops) (car ops))
 (define (rest-operands ops) (cdr ops))
 
-(define (cord? exp) (tagged-list? exp 'cond))
+(define (cond? exp) (tagged-list? exp 'cond))
 (define (cond-clauses exp) (cdr exp))
 (define (cond-else-clause? clause)
   (eq? (cond-predicate clause) 'else))
@@ -166,7 +166,7 @@
       (if (cond-else-clause? first)
         (if (null? rest)
           (sequence->exp (cond-actions first))
-          (errer "ELSE clause isn't last: COND->IF" clauses))
+          (error "ELSE clause isn't last: COND->IF" clauses))
         (make-if (cond-predicate first)
                  (sequence->exp (cond-actions first))
                  (expand-clauses rest))))))
