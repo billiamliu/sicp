@@ -1,4 +1,4 @@
-(define (begin? exp) (tagged-list? 'begin))
+(define (begin? exp) (tagged-list? exp 'begin))
 
 (define (begin-actions exp) (cdr exp))
 

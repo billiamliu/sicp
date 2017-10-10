@@ -22,4 +22,4 @@
 
 (define (procedure-body proc) (caddr proc))
 
-(define (procedure-environment proc) (cadddr p))
+(define (procedure-environment proc) (cadddr proc))

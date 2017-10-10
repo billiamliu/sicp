@@ -1,3 +1,5 @@
+(define native-apply apply)
+
 (load "metacircular/common.scm")
 
 (load "metacircular/apply.scm")
@@ -11,4 +13,11 @@
 (load "metacircular/lambda.scm")
 (load "metacircular/let.scm")
 (load "metacircular/quote.scm")
+(load "metacircular/repl.scm")
 (load "metacircular/sequence.scm")
+(load "metacircular/variable.scm")
+
+(load "metacircular/global.scm")
+
+(define the-global-environment (setup-environment))
+(driver-loop)
