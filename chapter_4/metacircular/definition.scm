@@ -44,6 +44,8 @@
         (iter defs (cons (car remain) bdy) (cdr remain)))))
   (iter '() '() body))
 
+;; TODO does not work with optimised
+;; pre-evaled format from ch.4.1.7
 (define (scan-out-defines body)
   (let* ((partitioned (partition-defines body))
          (let-vars (map definition-variable (car partitioned)))
@@ -55,3 +57,10 @@
     (if (null? let-bindings)
       body
       (list (make-let let-bindings (append assignments (cdr partitioned)))))))
+
+(define (analyze-definition exp)
+  (let ((var (definition-variable exp))
+        (vproc (analyze (definition-value exp))))
+    (lambda (env)
+      (define-variable! var (vproc env) env)
+      'ok)))
