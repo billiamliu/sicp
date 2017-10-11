@@ -7,5 +7,3 @@
 
 (define (make-lambda params body)
   (cons 'lambda (cons params body)))
-
-

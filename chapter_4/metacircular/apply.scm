@@ -20,6 +20,6 @@
 
 (define (procedure-parameters proc) (cadr proc))
 
-(define (procedure-body proc) (caddr proc))
+(define (procedure-body proc) (scan-out-defines (caddr proc)))
 
 (define (procedure-environment proc) (cadddr proc))
