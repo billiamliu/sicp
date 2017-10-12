@@ -15,6 +15,9 @@
 (define (make-procedure params body env)
   (list 'procedure params body env))
 
+(define (primitive-procedure? proc)
+  (tagged-list? proc 'primitive))
+
 (define (compound-procedure? proc)
   (tagged-list? proc 'procedure))
 
@@ -35,6 +38,8 @@
   (cond ((primitive-procedure? proc)
          (apply-primitive-procedure proc args))
         ((compound-procedure? proc)
+         (display "_-_- COMPOUND PROC?")
+         ;(display ((procedure-body proc) 123))
          ((procedure-body proc)
           (extend-environment (procedure-parameters proc)
                               args
