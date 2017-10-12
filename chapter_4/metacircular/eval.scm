@@ -14,10 +14,14 @@
          (eval-sequence (begin-actions exp) env))
         ((cond? exp) (eval (cond->if exp) env))
         ((application? exp)
-         (apply (eval (operator exp) env)
-                (list-of-values (operands exp) env)))
+         (apply (actual-value (operator exp) env)
+                (operands exp)
+                env))
         (else
           (error "Unknown expression type -- ANALYZE" exp))))
+
+(define (actual-value exp env)
+  (force-it (eval exp env)))
 
 (define (analyze-self-evaluating exp) (lambda (env) exp))
 

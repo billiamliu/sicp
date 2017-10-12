@@ -15,6 +15,7 @@
 (load "metacircular/quote.scm")
 (load "metacircular/repl.scm")
 (load "metacircular/sequence.scm")
+(load "metacircular/thunk.scm")
 (load "metacircular/variable.scm")
 
 (load "metacircular/global.scm")

@@ -1,16 +1,33 @@
 (define (application? exp) (pair? exp))
 
-(define (apply proc args)
-  (cond ((primitive-procedure? proc) (apply-primitive-procedure proc args))
+(define (apply proc args env)
+  (cond ((primitive-procedure? proc)
+         (apply-primitive-procedure
+           proc
+           (list-of-arg-values args env)))
         ((compound-procedure? proc)
          (eval-sequence
            (procedure-body proc)
            (extend-environment
              (procedure-parameters proc)
-             args
+             (list-of-delayed-args args env)
              (procedure-environment proc))))
         (else
           (error "Unknown procedure type -- APPLY" proc))))
+
+(define (list-of-arg-values exps env)
+  (if (no-operands? exps)
+    '()
+    (cons (actual-value (first-operand exps) env)
+          (list-of-arg-values (rest-operands exps)
+                              env))))
+
+(define (list-of-delayed-args exps env)
+  (if (no-operands? exps)
+    '()
+    (cons (delay-it (first-operand exps) env)
+          (list-of-delayed-args (rest-operands exps)
+                                env))))
 
 (define (make-procedure params body env)
   (list 'procedure params body env))
