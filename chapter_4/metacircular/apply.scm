@@ -38,8 +38,6 @@
   (cond ((primitive-procedure? proc)
          (apply-primitive-procedure proc args))
         ((compound-procedure? proc)
-         (display "_-_- COMPOUND PROC?")
-         ;(display ((procedure-body proc) 123))
          ((procedure-body proc)
           (extend-environment (procedure-parameters proc)
                               args

@@ -63,4 +63,4 @@
         (vproc (analyze (definition-value exp))))
     (lambda (env)
       (define-variable! var (vproc env) env)
-      var)))
+      'ok)))
