@@ -21,6 +21,3 @@
       (list (make-let (list (car assigns))
                       (iter (cdr assigns) body)))))
   (car (iter (cadr exp) (cddr exp))))
-
-(define (analyze-let exp)
-  (analyze (let->combination exp)))

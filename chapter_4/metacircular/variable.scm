@@ -15,6 +15,3 @@
       (let ((frame (first-frame env)))
         (scan (frame-variables frame) (frame-values frame)))))
   (env-loop env))
-
-(define (analyze-variable exp)
-  (lambda (env) (lookup-variable-value exp env)))
