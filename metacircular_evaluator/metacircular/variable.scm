@@ -6,7 +6,9 @@
       (cond ((null? vars)
              (env-loop (enclosing-environment env))) ;; parent env
             ((eq? var (car vars))
-             (car vals))
+             (if (eq? (car vals) '*unassigned*)
+               (error "Unassigned variable" var)
+               (car vals)))
             (else (scan (cdr vars) (cdr vals)))))
     (if (eq? env the-empty-environment)
       (error "Unbound variable" var)
@@ -14,3 +16,5 @@
         (scan (frame-variables frame) (frame-values frame)))))
   (env-loop env))
 
+(define (analyze-variable exp)
+  (lambda (env) (lookup-variable-value exp env)))

@@ -7,9 +7,6 @@
     (define-variable! 'false #f initial-env)
     initial-env))
 
-(define (primitive-procedure? proc)
-  (tagged-list? proc 'primitive))
-
 (define (primitive-implementation proc) (cadr proc))
 
 (define primitive-procedures
