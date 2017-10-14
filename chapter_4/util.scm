@@ -23,7 +23,19 @@
     (and a (not b))
     (and b (not a))))
 
-(define (perf-test iter thunk)
+(define (perf-test . args)
+  ; make variadic
+  (define iter '())
+  (define thunk '())
+  (if (null? (cdr args))
+    (begin
+      (set! iter 100)
+      (set! thunk (car args)))
+    (begin
+      (set! iter (car args))
+      (set! thunk (cadr args))))
+  (define runs iter)
+
   (with-timings
     (lambda ()
       (define (run)
@@ -36,9 +48,11 @@
       (run))
     (lambda (run-time gc-time real-time)
       (newline)
-      (display "Run Time: ") (display run-time)
+      (display ";Iterations: ") (display runs)
       (newline)
-      (display "GC Time: ") (display gc-time)
+      (display ";Run Time:   ") (display run-time)
       (newline)
-      (display "Real Time: ") (display real-time)
+      (display ";GC Time:    ") (display gc-time)
+      (newline)
+      (display ";Thunk return:")
       )))
