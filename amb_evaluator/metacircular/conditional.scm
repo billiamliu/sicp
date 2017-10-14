@@ -49,7 +49,12 @@
   (let ((pproc (analyze (if-predicate exp)))
         (cproc (analyze (if-consequent exp)))
         (aproc (analyze (if-alternative exp))))
-    (lambda (env)
-      (if (true? (pproc env))
-        (cproc env)
-        (aproc env)))))
+    (lambda (env succeed fail)
+      (pproc env
+             ; success predicate
+             (lambda (pred-value fail2)
+               (if (true? pred-value)
+                 (cproc env succeed fail2)
+                 (aproc env succeed fail2)))
+             ; failing predicate
+             fail))))

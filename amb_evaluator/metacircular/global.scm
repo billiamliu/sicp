@@ -18,6 +18,7 @@
         (list '- -)
         (list '* *)
         (list '/ /)
+        (list 'list list)
         ;; ... MORE
         ))
 

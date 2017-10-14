@@ -3,6 +3,7 @@
 
 (define (analyze exp)
   (cond ((self-evaluating? exp) (analyze-self-evaluating exp))
+        ((amb? exp) (analyze-amb exp))
         ((quoted? exp) (analyze-quoted exp))
         ((variable? exp) (analyze-variable exp))
         ((assignment? exp) (analyze-assignment exp))
@@ -16,7 +17,9 @@
         (else
           (error "Unknown expression type -- ANALYZE" exp))))
 
-(define (analyze-self-evaluating exp) (lambda (env) exp))
+(define (analyze-self-evaluating exp)
+  (lambda (env succeed fail)
+    (succeed exp fail)))
 
 (define (self-evaluating? exp)
   (cond ((number? exp) #t)

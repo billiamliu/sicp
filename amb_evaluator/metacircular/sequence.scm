@@ -15,8 +15,14 @@
 (define (rest-exps seq) (cdr seq))
 
 (define (analyze-sequence exps)
-  (define (sequentially pro1 proc2)
-    (lambda (env) (proc1 env) (proc2 env)))
+  (define (sequentially a b)
+    (lambda (env succeed fail)
+      (a env
+         ; success
+         (lambda (a-value fail2)
+           (b env succeed fail2))
+         ; failure
+         fail)))
   (define (loop first-proc rest-procs)
     (if (null? rest-procs)
       first-proc

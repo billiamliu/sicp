@@ -17,4 +17,5 @@
   (env-loop env))
 
 (define (analyze-variable exp)
-  (lambda (env) (lookup-variable-value exp env)))
+  (lambda (env succeed fail)
+    (succeed (lookup-variable-value exp env) fail)))

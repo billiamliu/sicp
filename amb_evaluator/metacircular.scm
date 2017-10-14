@@ -2,6 +2,7 @@
 
 (load "metacircular/common.scm")
 
+(load "metacircular/amb")
 (load "metacircular/apply.scm")
 (load "metacircular/assignment.scm")
 (load "metacircular/begin.scm")

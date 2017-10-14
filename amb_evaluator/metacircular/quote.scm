@@ -6,4 +6,5 @@
 
 (define (analyze-quoted exp)
   (let ((qval (text-of-quotation exp)))
-    (lambda (env) eval)))
+    (lambda (env succeed fail)
+      (succeed qval fail))))
