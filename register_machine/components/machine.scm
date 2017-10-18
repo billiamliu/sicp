@@ -30,7 +30,7 @@
             (list (list 'initialize-stack
                         (lambda () (stack 'initialize)))
                   (list 'print-stack-statistics
-                        (lambda () (stack 'print-statistics))))
+                        (lambda () (stack 'print-statistics)))))
           (register-table
             (list (list 'pc pc) (list 'flag flag))))
       (define (allocate-register name)
@@ -46,8 +46,8 @@
             (cadr val)
             (error "Unknown register:" name))))
       (define (execute)
-        (let ((instructions (get-contents pc)))
-          (if (null? instructions)
+        (let ((insts (get-contents pc)))
+          (if (null? insts)
             'done
             (begin
               ((instruction-execution-proc (car insts)))

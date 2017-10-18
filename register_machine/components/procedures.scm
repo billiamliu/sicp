@@ -160,7 +160,7 @@
 (define (operation-exp-op operation-exp)
   (cadr (car operation-exp)))
 
-(define (operation-exp operands operation-exp)
+(define (operation-exp-operands operation-exp)
   (cdr operation-exp))
 
 (define (lookup-prim symbol operations)
