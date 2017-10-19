@@ -22,4 +22,5 @@
   (set-register-contents! gcd-machine 'a a)
   (set-register-contents! gcd-machine 'b b)
   (start gcd-machine)
+  ((gcd-machine 'stack) 'print-statistics)
   (get-register-contents gcd-machine 'a))
