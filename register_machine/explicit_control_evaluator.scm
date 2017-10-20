@@ -1,12 +1,5 @@
 (load "machine.scm")
-
-(define eceval-operations
-  (list (list 'self-evaluating? self-evaluating)
-        ;; TODO fill this in
-        ))
-
-(define the-global-environment
-  (setup-environment))
+(load "components/environment.scm")
 
 (define eceval
   (make-machine
